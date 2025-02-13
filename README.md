@@ -147,3 +147,64 @@ Now we'll configure the network adapters for each VM.
 
     - Click "OK".
 
+3. **Configure 'rootdc2':**
+    - Select the 'rootdc2' VM.
+    - `Settings` -> `Network` -> `Adapter 1`.
+
+    - **Enable Network Adapter:** Checked.
+    - **Attached to:** `Internal Network`.
+    - **Name:** `on-prem-net-10.2.0.0`
+    - **Adapter Type:** 'Intel PRO/1000 MT Server (82545EM)
+
+    ![rootdc2 Network Settings - After](screenshots/part2-rootdc2-network-after.png)
+
+    - Click "OK".
+
+4. **Configure 'rootdc3':**
+    - Select the 'rootdc2' VM.
+    - `Settings` -> `Network` -> `Adapter 1`.
+
+    - **Enable Network Adapter:** Checked.
+    - **Attached to:** `NAT Network`.
+    - **Name:** `cloud-nat-network`
+    - **Adapter Type:** 'Intel PRO/1000 MT Server (82545EM)
+
+    ![rootdc3 Network Settings - After](screenshots/part2-rootdc3-network-after.png)
+
+    - Click "OK".
+
+5. **Configure `cdc1`:**
+   - Select the `cdc1` VM.
+    - `Settings` -> `Network` -> `Adapter 1`.
+
+    - **Enable Network Adapter:** Checked.
+    - **Attached to:** `Internal Network`.
+    - **Name:** `branch-net-10.3.0.0`
+
+    ![cdc1 Network Settings - After](screenshots/part2-cdc1-network-after.png)
+
+    - Click "OK".
+
+6.  **Configure `crodc1`:**
+    - Select the `crodc1` VM.
+    - `Settings` -> `Network` -> `Adapter 1`.
+
+    - **Enable Network Adapter:** Checked.
+    - **Attached to:** `Internal Network`.
+    - **Name:** `branch-net-10.4.0.0`
+
+    ![crodc1 Network Settings - After](screenshots/part2-crodc1-network-after.png)
+
+    - Click "OK".
+
+7. **Configure `acqdc1`:**
+    - Select the `acqdc1` VM.
+    - `Settings` -> `Network` -> `Adapter 1`.
+
+    - **Enable Network Adapter:** Checked.
+    - **Attached to:** `Internal Network`.
+    - **Name:** `acq-net-192.168.0.0`
+
+    ![acqdc1 Network Settings - After](screenshots/part2-acqdc1-network-after.png)
+
+    - Click "OK".
