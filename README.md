@@ -110,3 +110,40 @@ This part involves creating the eight virtual machines needed for the lab enviro
     - Hard Disk
         - **File Size:** '10 GB'
     - Click "Finish"
+
+### Configuring Network Adapters
+
+Now we'll configure the network adapters for each VM.
+
+1. **Configure 'cli1':**
+    - Select the 'cli1' VM in VirtualBox Manager.
+    - Click 'Settings'.
+    - Toggle 'Expert' mode.
+    - Click 'Network'.
+    - Select the 'Adapter 1' tab.
+
+    ![cli1 Network Settings - Before](screenshots/part2-cli1-network-before.png)
+
+    - **Enable Network Adapter:** Check this box.
+    - **Attached to:** Select 'Internal Network'.
+    - **Name:** Type 'on-prem-net-10.1.0.0' (This creates the internal network).
+
+    ![cli1 Network Settings - After](screenshots/part2-cli1-network-after.png)
+
+    - Click "OK" to save the changes.
+
+2. **Configure 'rootdc1':**
+    - Select the 'rootdc1' VM.
+    - 'Settings' -> 'Expert' -> 'Network' -> 'Adatper 1'.
+
+    ![rootdc1 Network Settings - Before](screenshots/part2-rootdc1-network-before.png)
+
+    - **Enable Network Adapter:** Checked.
+    - **Attached to:** `Internal Network`.
+    - **Name:** `on-prem-net-10.1.0.0`
+    - **Adapter Type:** 'Intel PRO/1000 MT Server (82545EM)
+
+    ![rootdc1 Network Settings - After](screenshots/part2-rootdc1-network-after.png)
+
+    - Click "OK".
+
