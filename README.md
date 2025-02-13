@@ -208,3 +208,96 @@ Now we'll configure the network adapters for each VM.
     ![acqdc1 Network Settings - After](screenshots/part2-acqdc1-network-after.png)
 
     - Click "OK".
+
+8. **Configure `pfsense-router`:**
+    - Select the `pfsense-router` VM.
+    - `Settings` -> `Network`.
+
+    > **Note:** For the `pfsense-router` VM (and generally for any Linux/FreeBSD VMs), we'll use the `Paravirtualized Network (virtio-net)` adapter type for improved performance.
+
+    - **Adapter 1:**
+    - **Enable Network Adapter:** Checked.
+    - **Attached to:** `NAT Network`.
+    - **Name:** `cloud-nat-network`
+
+    ![pfsense-router Network Adapter 1 - After](screenshots/part2-pfsense-network-adapter1-after.png)
+
+    - **Adapter 2:**
+    - Click the "Adapter 2" tab.
+    - **Enable Network Adapter:** Checked.
+    - **Attached to:** `Internal Network`.
+    - **Name:** `on-prem-net-10.1.0.0`
+
+    ![pfsense-router Network Adapter 2](screenshots/part2-pfsense-network-adapter2.png)
+
+    - **Adapter 3:**
+    - Click the "Adapter 3" tab.
+    - **Enable Network Adapter:** Checked.
+    - **Attached to:** `Internal Network`.
+    - **Name:** `on-prem-net-10.2.0.0`
+
+    ![pfsense-router Network Adapter 3](screenshots/part2-pfsense-network-adapter3.png)
+
+    - **Adapter 4:**
+    - Click the "Adapter 4" tab.
+    - **Enable Network Adapter:** Checked.
+    - **Attached to:** `Internal Network`.
+    - **Name:** `branch-net-10.3.0.0`
+
+    ![pfsense-router Network Adapter 4](screenshots/part2-pfsense-network-adapter4.png)
+
+    - Click "OK" to save the changes.
+
+    - **Adapters 5, 6, and 7 (Command Line):**
+        - **Important:** VirtualBox only shows 4 adapters in the GUI. We need to use the command line to enable and configure adapters 5, 6, and 7.
+        - Close VirtualBox completely.
+        - Open a terminal (Command Prompt or PowerShell as *administrator* on Windows, or a regular terminal on macOS/Linux).
+        
+        - Run the following commands, one at a time:
+
+            ```bash
+            cd "C:\Program Files\Oracle\VirtualBox"
+            ./VBoxManage modifyvm "pfsense-router" --nic5 intnet --nictype5 virtio --intnet5 "branch-net-10.4.0.0"
+            ./VBoxManage modifyvm "pfsense-router" --nic6 intnet --nictype6 virtio --intnet6 "acq-net-192.168.0.0"
+            ./VBoxManage modifyvm "pfsense-router" --nic7 intnet --nictype7 virtio --intnet7 "cloud-net-172.16.0.0"
+          ```
+
+ ## Troubleshooting and Notes (Part 2)
+
+This section summarizes issues encountered during Part 2 (VM creation and network configuration) and their solutions.
+
+### VirtualBox 7.x GUI vs. Command Line
+
+*   **Issue:** VirtualBox 7.x has a significantly different "Create Virtual Machine" wizard compared to older versions. The instructions, initially written for an older version, needed to be adapted.
+*   **Solution:** The instructions were updated to reflect the new, multi-step wizard in VirtualBox 7.x.
+
+*   **Issue:** The VirtualBox 7.x GUI may not always display all configured network adapters, particularly adapters 5-7 on the `pfsense-router` VM, even after they are correctly enabled via the command line.
+*   **Solution:** Rely on the command-line tool `VBoxManage` (specifically, `VBoxManage showvminfo "vm-name"`) to verify the *actual* VM configuration. If the command-line output shows the correct network adapter settings, the configuration is correct, even if the GUI doesn't display it. Restarting VirtualBox might resolve the GUI display issue.
+
+### `VBoxManage` Command Usage
+
+*   **Issue:** The `VBoxManage` command was not initially recognized.
+*   **Solution:** Either run `VBoxManage` from the VirtualBox installation directory (e.g., `C:\Program Files\Oracle\VirtualBox` on Windows) or add that directory to your system's `PATH` environment variable.
+
+*   **Issue:** On macOS, Linux, and in PowerShell on Windows, the `VBoxManage` command needs to be prefixed with `./` when run from the installation directory.  For example: `./VBoxManage ...`
+*   **Solution:**  The instructions were updated to include the `./` prefix.
+
+*    **Issue** Incorrect Adapter Type parameter used in command line.
+*     **Solution** Use `virtio-net`
+
+### Windows 11 Minimum Requirements
+
+*   **Issue:** The initially suggested memory (2GB) and disk space (20GB) for the Windows 11 `cli1` VM were below the recommended minimums for a usable Windows 11 installation.
+*   **Solution:** The instructions were updated to recommend 4GB of RAM and 64GB of disk space for Windows 11 VMs.
+
+### Cloning VMs
+
+* **Suggestion:** Although not an *issue*, per se, the suggestion to use the Clone feature was added to the documentation for Part 2.
+
+### pfSense Network Adapters
+
+*   **Issue:** The initial instructions did not specify the correct network adapter type for optimal performance with pfSense.
+*   **Solution:** The instructions were updated to recommend using the `Paravirtualized Network (virtio-net)` adapter type for all network adapters on the `pfsense-router` VM.
+
+* **Issue** The GUI does not show adapters beyond 4.
+* **Solution** Use the command line, as detailed in the instructions.
