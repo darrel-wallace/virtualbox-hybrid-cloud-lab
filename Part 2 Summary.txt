@@ -1,0 +1,20 @@
+We just finished Part 2. Part 2 was all about creating the virtual machines and configuring their network adapters. To recap, Part 2 covered:
+
+    Creating the VMs:
+        Creating the cli1 VM (Windows 11).
+        Creating the rootdc1 VM (Windows Server 2022 - base image for cloning).
+        Cloning rootdc1 to create rootdc2, rootdc3, cdc1, crodc1, and acqdc1.
+        Creating the pfsense-router VM.
+
+    Configuring Network Adapters:
+        Setting up the network adapter for cli1 (Internal Network, on-prem-net-10.1.0.0).
+        Setting up the network adapter for rootdc1 (Internal Network, on-prem-net-10.1.0.0).
+        Setting up the network adapter for rootdc2 (Internal Network, on-prem-net-10.2.0.0).
+        Setting up the network adapter for rootdc3 (NAT Network, cloud-nat-network).
+        Setting up the network adapter for cdc1 (Internal Network, branch-net-10.3.0.0).
+        Setting up the network adapter for crodc1 (Internal Network, branch-net-10.4.0.0).
+        Setting up the network adapter for acqdc1 (Internal Network, acq-net-192.168.0.0).
+        Setting up all seven network adapters for pfsense-router (using the command line for adapters 5-7), and ensuring they all use the virtio-net adapter type.
+        Troubleshooting issues encountered along the way
+
+We went through several iterations and troubleshooting steps within Part 2, but the end result is that all eight VMs should now be created, and their network adapters should be configured according to the instructions (and verified with VBoxManage showvminfo "pfsense-router" for the pfSense VM).

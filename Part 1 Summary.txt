@@ -1,0 +1,31 @@
+Okay, here's a summary of Part 1, similar in style to the Part 2 summary:
+
+Part 1: VirtualBox Network Configuration
+
+Part 1 focused on setting up the initial network configuration within VirtualBox, specifically creating the NAT Network that will be used for the "cloud" portion of the lab environment.
+
+Steps:
+
+    Open VirtualBox Network Manager:
+        Opened the VirtualBox Network Manager (Tools -> Network or File -> Host Network Manager in older versions).
+
+    Create NAT Network:
+        Navigated to the "NAT Networks" tab.
+        Created a new NAT Network.
+        Renamed the new network to cloud-nat-network.
+        Configured the network:
+            Set the Network CIDR to 172.16.0.0/24.
+            Ensured the "Enable DHCP" checkbox was checked.
+        Closed the Network Manager.
+
+Key Concepts:
+
+    NAT Network: A NAT Network in VirtualBox provides a way for VMs to access the internet (or, more accurately, the host machine's network, which is typically connected to the internet) while remaining isolated from the host's network. The NAT Network acts as a virtual router, performing Network Address Translation.
+    CIDR Notation: 172.16.0.0/24 defines the network address and subnet mask. The /24 means that the first 24 bits of the IP address are used for the network address, leaving the remaining 8 bits for host addresses within that network (giving a range of 172.16.0.1 to 172.16.0.254 for usable addresses).
+    Implicit Internal Network Creation Internal Networks in VirtualBox are not explicitly created, but are created implicitly once assigned to a VM.
+
+Troubleshooting (None in Part 1):
+
+Part 1 was relatively straightforward and didn't involve any significant troubleshooting. The main point of confusion was the initial misunderstanding about how Internal Networks are created (which was clarified before we actually started implementing Part 1).
+
+This summary provides a concise overview of what was accomplished in Part 1. You can add this to your README.md, perhaps as a section before Part 2, or as an introductory paragraph to Part 1 itself. You could also include a "Key Concepts" section if you're aiming for a more educational document.
